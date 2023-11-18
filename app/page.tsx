@@ -1,16 +1,19 @@
-'use client';
+"use client";
 
-import { useChat } from 'ai/react';
+import { UserButton } from "@clerk/nextjs";
+import { useChat } from "ai/react";
 
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit } = useChat({});
 
   return (
     <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch">
+      <UserButton afterSignOutUrl="/" />
+
       {messages.length > 0
-        ? messages.map(m => (
+        ? messages.map((m) => (
             <div key={m.id} className="whitespace-pre-wrap">
-              {m.role === 'user' ? 'User: ' : 'AI: '}
+              {m.role === "user" ? "User: " : "AI: "}
               {m.content}
             </div>
           ))
